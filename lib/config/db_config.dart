@@ -2,8 +2,9 @@ import 'dart:io' show Platform;
 
 /// Datele de conectare la PostgreSQL.
 ///
-/// Se pot schimba fără să modifici codul, la rulare:
-///   flutter run --dart-define=DB_HOST=192.168.1.20 --dart-define=DB_PASSWORD=...
+/// Implicit: baza locală de pe Mac. Pentru Supabase, datele vin din
+/// `config/supabase.json` (nu e în git):
+///   flutter run -d iphone --dart-define-from-file=config/supabase.json
 ///
 /// Atenție: tot ce e aici ajunge în aplicația compilată. E în regulă pentru
 /// o bază de date locală, de dezvoltare; pentru o aplicație publicată,
@@ -23,6 +24,9 @@ abstract final class DbConfig {
     'DB_PASSWORD',
     defaultValue: '32aa078c632cae7a686699da72a7f0b6',
   );
+
+  /// Conexiune criptată (obligatorie pentru Supabase).
+  static const ssl = bool.fromEnvironment('DB_SSL');
 
   /// Simulatorul iOS vede Mac-ul la 127.0.0.1; emulatorul Android la 10.0.2.2.
   static String get host {

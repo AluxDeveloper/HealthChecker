@@ -22,7 +22,9 @@ void main() {
           username: DbConfig.username,
           password: DbConfig.password,
         ),
-        settings: const ConnectionSettings(sslMode: SslMode.disable),
+        settings: ConnectionSettings(
+          sslMode: DbConfig.ssl ? SslMode.require : SslMode.disable,
+        ),
       );
     } catch (_) {
       available = false;

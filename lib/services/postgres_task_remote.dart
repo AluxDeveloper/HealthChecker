@@ -22,10 +22,10 @@ class PostgresTaskRemote implements TaskRemote {
         username: DbConfig.username,
         password: DbConfig.password,
       ),
-      settings: const ConnectionSettings(
-        sslMode: SslMode.disable, // conexiune locală
-        connectTimeout: Duration(seconds: 4),
-        queryTimeout: Duration(seconds: 10),
+      settings: ConnectionSettings(
+        sslMode: DbConfig.ssl ? SslMode.require : SslMode.disable,
+        connectTimeout: const Duration(seconds: 10),
+        queryTimeout: const Duration(seconds: 15),
       ),
     );
     _conn = conn;

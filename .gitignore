@@ -47,3 +47,6 @@ app.*.map.json
 # Widget Preview related
 .widget_preview/
 /dist/
+
+# Parola bazei Supabase
+/config/supabase.json
