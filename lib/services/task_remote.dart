@@ -1,7 +1,7 @@
 import '../models/task.dart';
 
 /// Locul în care [TaskStore] păstrează o copie a sarcinilor (baza de date).
-/// Interfața permite rularea testelor fără PostgreSQL.
+/// Interfața permite rularea testelor fără internet.
 abstract interface class TaskRemote {
   /// Șterge definitiv sarcinile expirate și le întoarce pe toate celelalte.
   Future<List<Task>> fetchAll();

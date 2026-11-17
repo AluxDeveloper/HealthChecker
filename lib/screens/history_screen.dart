@@ -239,7 +239,7 @@ class _Empty extends StatelessWidget {
   }
 }
 
-/// Starea legăturii cu PostgreSQL, ca să vezi că datele ajung în bază.
+/// Starea legăturii cu Supabase, ca să vezi că datele ajung în cloud.
 class _SyncFooter extends StatelessWidget {
   const _SyncFooter({required this.store});
 
@@ -264,13 +264,13 @@ class _SyncFooter extends StatelessWidget {
       SyncStatus.online => (
         CupertinoIcons.checkmark_circle_fill,
         CupertinoColors.systemGreen.resolveFrom(context),
-        'Salvat în PostgreSQL'
+        'Salvat în cloud (Supabase)'
             '${last == null ? '' : ' · ${RoFormat.time(last)}'}',
       ),
       SyncStatus.offline => (
         CupertinoIcons.exclamationmark_triangle_fill,
         CupertinoColors.systemOrange.resolveFrom(context),
-        'Baza de date nu răspunde. Datele se salvează pe telefon și '
+        'Fără legătură cu serverul. Datele se salvează pe telefon și '
             'se trimit când revine legătura.',
       ),
     };

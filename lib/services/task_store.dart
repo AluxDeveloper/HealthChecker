@@ -172,7 +172,7 @@ class TaskStore extends ChangeNotifier {
     } catch (e) {
       _syncStatus = SyncStatus.offline;
       _syncError = e.toString();
-      debugPrint('Sincronizarea cu PostgreSQL a eșuat: $e');
+      debugPrint('Sincronizarea cu Supabase a eșuat: $e');
     } finally {
       _syncing = false;
       notifyListeners();

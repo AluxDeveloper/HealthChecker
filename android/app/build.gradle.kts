@@ -6,7 +6,8 @@ plugins {
 
 android {
     namespace = "com.bunelu.sarcini"
-    compileSdk = flutter.compileSdkVersion
+    // flutter_local_notifications și androidx.core cer cel puțin 37.
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

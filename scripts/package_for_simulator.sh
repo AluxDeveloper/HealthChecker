@@ -10,7 +10,6 @@ OUT=dist/Sarcini
 rm -rf "$OUT" dist/Sarcini-simulator.zip
 mkdir -p "$OUT"
 cp -R build/ios/iphonesimulator/Runner.app "$OUT/Sarcini.app"
-cp scripts/setup_db.sh "$OUT/setup_db.sh"
 cp scripts/install_on_simulator.sh "$OUT/instaleaza.sh"
 cp scripts/CITESTE.md "$OUT/CITESTE.md"
 

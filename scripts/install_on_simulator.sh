@@ -9,10 +9,7 @@ if ! xcrun simctl help >/dev/null 2>&1; then
   exit 1
 fi
 
-# 1. Baza de date PostgreSQL
-zsh ./setup_db.sh
-
-# 2. Un iPhone în simulator (cel pornit sau primul disponibil)
+# 1. Un iPhone în simulator (cel pornit sau primul disponibil)
 DEV=$(xcrun simctl list devices booted | grep -m1 -oE '[0-9A-F]{8}(-[0-9A-F]{4}){3}-[0-9A-F]{12}' || true)
 if [[ -z "$DEV" ]]; then
   DEV=$(xcrun simctl list devices available | grep -m1 'iPhone' | grep -oE '[0-9A-F]{8}(-[0-9A-F]{4}){3}-[0-9A-F]{12}' || true)
@@ -25,7 +22,7 @@ if [[ -z "$DEV" ]]; then
 fi
 open -a DeviceHub 2>/dev/null || open -a Simulator
 
-# 3. Aplicația
+# 2. Aplicația
 echo "→ Instalez Sarcini…"
 xattr -dr com.apple.quarantine Sarcini.app 2>/dev/null || true
 xcrun simctl install "$DEV" Sarcini.app
