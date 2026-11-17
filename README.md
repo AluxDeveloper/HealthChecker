@@ -1,4 +1,4 @@
-# Tasks ❤️ – health reminders, right on time
+# Tasks – health reminders, right on time
 
 **Tasks** is a small, calm app for the healthy habits that are easy to forget:
 your pills, a glass of water, a walk, going to bed on time, or a doctor's
