@@ -61,7 +61,7 @@ class _TaskTileState extends State<TaskTile> {
                 ),
                 SizedBox(height: 3),
                 Text(
-                  'Șterge',
+                  'Delete',
                   style: TextStyle(
                     color: CupertinoColors.white,
                     fontSize: 13,
@@ -113,7 +113,7 @@ class _TaskTileState extends State<TaskTile> {
                             const SizedBox(width: 4),
                           ],
                           Text(
-                            RoFormat.dateTime(task.dueAt),
+                            AppFormat.dateTime(task.dueAt),
                             style: TextStyle(fontSize: 14, color: timeColor),
                           ),
                           const SizedBox(width: 4),

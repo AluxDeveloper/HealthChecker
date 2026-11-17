@@ -101,12 +101,12 @@ class _TasksScreenState extends State<TasksScreen> {
                     largeTitle: const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('Sarcini'),
+                        Text('Tasks'),
                         SizedBox(width: 10),
                         BeatingHeart(size: 26),
                       ],
                     ),
-                    middle: const Text('Sarcini'),
+                    middle: const Text('Tasks'),
                     alwaysShowMiddle: false,
                     backgroundColor: bg.withValues(alpha: 0.85),
                     border: null,
@@ -121,8 +121,8 @@ class _TasksScreenState extends State<TasksScreen> {
                             ),
                             child: Text(
                               _showCompleted
-                                  ? 'Ascunde finalizate'
-                                  : 'Arată finalizate',
+                                  ? 'Hide completed'
+                                  : 'Show completed',
                               style: const TextStyle(fontSize: 15),
                             ),
                           ),
@@ -151,12 +151,12 @@ class _TasksScreenState extends State<TasksScreen> {
                       )
                     else ...[
                       if (pending.isNotEmpty) ...[
-                        _header(context, 'De făcut', pending.length),
+                        _header(context, 'To do', pending.length),
                         _cards(pending, () => index++),
                       ] else
                         const SliverToBoxAdapter(child: _AllDone()),
                       if (completed.isNotEmpty && _showCompleted) ...[
-                        _header(context, 'Finalizate', completed.length),
+                        _header(context, 'Completed', completed.length),
                         _cards(completed, () => index++),
                       ],
                     ],
@@ -242,7 +242,7 @@ class _HistoryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'Istoric',
+      label: 'History',
       button: true,
       excludeSemantics: true,
       child: CupertinoButton(
@@ -301,7 +301,7 @@ class _BottomBar extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'Sarcină nouă',
+                        'New task',
                         style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w600,
@@ -343,7 +343,7 @@ class _EmptyState extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Text(
-            'Nicio sarcină',
+            'No tasks',
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w700,
@@ -353,8 +353,8 @@ class _EmptyState extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Adaugă un medicament, un pahar cu apă sau o plimbare. '
-            'Îți trimitem o notificare exact la ora aleasă.',
+            'Add a medication, a glass of water or a walk. '
+            'You will get a reminder right on time.',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 15, height: 1.35, color: secondary),
           ),
@@ -381,7 +381,7 @@ class _AllDone extends StatelessWidget {
           ),
           const SizedBox(width: 6),
           Text(
-            'Totul este făcut. Bravo!',
+            'All done. Great job!',
             style: TextStyle(
               fontSize: 15,
               color: CupertinoColors.secondaryLabel.resolveFrom(context),

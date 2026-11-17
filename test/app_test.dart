@@ -79,20 +79,20 @@ void main() {
     tester,
   ) async {
     await pumpApp(tester);
-    expect(find.text('Nicio sarcină'), findsOneWidget);
+    expect(find.text('No tasks'), findsOneWidget);
 
     // Adăugare
-    await tester.tap(find.text('Sarcină nouă'));
+    await tester.tap(find.text('New task'));
     await tester.pumpAndSettle();
     await tester.enterText(
       find.byType(CupertinoTextField).first,
       'Sună la medic',
     );
     await tester.pump();
-    await tester.tap(find.text('Peste 1 oră'));
+    await tester.tap(find.text('In 1 hour'));
     await tester.pumpAndSettle();
     await tester.runAsync(() async {
-      await tester.tap(find.text('Adaugă'));
+      await tester.tap(find.text('Add'));
       await Future<void>.delayed(const Duration(milliseconds: 50));
     });
     await tester.pumpAndSettle();
@@ -105,14 +105,14 @@ void main() {
     // Modificare
     await tester.tap(find.text('Sună la medic'));
     await tester.pumpAndSettle();
-    expect(find.text('Detalii'), findsOneWidget);
+    expect(find.text('Details'), findsOneWidget);
     await tester.enterText(
       find.byType(CupertinoTextField).first,
       'Sună la dentist',
     );
     await tester.pump();
     await tester.runAsync(() async {
-      await tester.tap(find.text('Gata'));
+      await tester.tap(find.text('Done'));
       await Future<void>.delayed(const Duration(milliseconds: 50));
     });
     await tester.pumpAndSettle();
@@ -125,7 +125,7 @@ void main() {
     await tester.tap(find.byType(CupertinoSwitch));
     await tester.pump();
     await tester.runAsync(() async {
-      await tester.tap(find.text('Gata'));
+      await tester.tap(find.text('Done'));
       await Future<void>.delayed(const Duration(milliseconds: 50));
     });
     await tester.pumpAndSettle();
@@ -138,7 +138,7 @@ void main() {
     });
     await tester.pumpAndSettle();
     expect(store.pending, isEmpty);
-    expect(find.text('Nicio sarcină'), findsOneWidget);
+    expect(find.text('No tasks'), findsOneWidget);
   });
 
   testWidgets('bifarea anulează notificarea, debifarea o reprogramează', (
@@ -157,7 +157,7 @@ void main() {
     await tester.runAsync(() => store.toggleDone(store.pending.single));
     await tester.pumpAndSettle();
     expect(notifier.scheduled.containsKey(1), isFalse);
-    expect(find.text('Finalizate'), findsOneWidget);
+    expect(find.text('Completed'), findsOneWidget);
 
     await tester.runAsync(() => store.toggleDone(store.completed.single));
     expect(notifier.scheduled.containsKey(1), isTrue);
@@ -181,32 +181,32 @@ void main() {
 
   testWidgets('categoria aleasă se salvează', (tester) async {
     await pumpApp(tester);
-    await tester.tap(find.text('Sarcină nouă'));
+    await tester.tap(find.text('New task'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Medicament'));
+    await tester.tap(find.text('Medication'));
     await tester.pump();
-    expect(find.text('ex. Vitamina D, 1 capsulă'), findsOneWidget);
+    expect(find.text('e.g. Vitamin D, 1 capsule'), findsOneWidget);
     await tester.enterText(find.byType(CupertinoTextField).first, 'Vitamina D');
-    await tester.tap(find.text('Peste 1 oră'));
+    await tester.tap(find.text('In 1 hour'));
     await tester.pumpAndSettle();
     await tester.runAsync(() async {
-      await tester.tap(find.text('Adaugă'));
+      await tester.tap(find.text('Add'));
       await Future<void>.delayed(const Duration(milliseconds: 50));
     });
     await tester.pumpAndSettle();
     expect(store.pending.single.category, TaskCategory.medication);
-    expect(find.text('Medicament'), findsOneWidget);
+    expect(find.text('Medication'), findsOneWidget);
   });
 
   testWidgets('intro-ul cu inima duce la lista de sarcini', (tester) async {
     await tester.pumpWidget(SarciniApp(store: store));
     await tester.runAsync(store.load);
     await tester.pump(const Duration(milliseconds: 900));
-    expect(find.text('Grijă de tine, la timp.'), findsOneWidget);
+    expect(find.text('Take care of yourself, on time.'), findsOneWidget);
     await tester.pump(const Duration(seconds: 3));
     await tester.pump(const Duration(seconds: 1));
-    expect(find.text('Grijă de tine, la timp.'), findsNothing);
-    expect(find.text('Sarcină nouă'), findsOneWidget);
+    expect(find.text('Take care of yourself, on time.'), findsNothing);
+    expect(find.text('New task'), findsOneWidget);
     // oprește animațiile continue înainte de final
     await tester.pumpWidget(const SizedBox());
   });

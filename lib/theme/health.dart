@@ -40,11 +40,11 @@ abstract final class HealthColors {
 /// Aspectul fiecărei categorii: nume, pictogramă, culoare și texte ajutătoare.
 extension TaskCategoryStyle on TaskCategory {
   String get label => switch (this) {
-    TaskCategory.medication => 'Medicament',
-    TaskCategory.hydration => 'Hidratare',
-    TaskCategory.activity => 'Mișcare',
-    TaskCategory.sleep => 'Somn',
-    TaskCategory.appointment => 'Consultație',
+    TaskCategory.medication => 'Medication',
+    TaskCategory.hydration => 'Hydration',
+    TaskCategory.activity => 'Activity',
+    TaskCategory.sleep => 'Sleep',
+    TaskCategory.appointment => 'Appointment',
     TaskCategory.general => 'General',
   };
 
@@ -79,22 +79,22 @@ extension TaskCategoryStyle on TaskCategory {
   };
 
   String get placeholder => switch (this) {
-    TaskCategory.medication => 'ex. Vitamina D, 1 capsulă',
-    TaskCategory.hydration => 'ex. Bea un pahar cu apă',
-    TaskCategory.activity => 'ex. Plimbare 30 de minute',
-    TaskCategory.sleep => 'ex. La culcare fără telefon',
-    TaskCategory.appointment => 'ex. Control la medicul de familie',
-    TaskCategory.general => 'Titlu',
+    TaskCategory.medication => 'e.g. Vitamin D, 1 capsule',
+    TaskCategory.hydration => 'e.g. Drink a glass of water',
+    TaskCategory.activity => 'e.g. 30-minute walk',
+    TaskCategory.sleep => 'e.g. No phone before bed',
+    TaskCategory.appointment => 'e.g. Check-up with the family doctor',
+    TaskCategory.general => 'Title',
   };
 
   /// Textul notificării când sarcina nu are notițe.
   String get reminderBody => switch (this) {
-    TaskCategory.medication => 'Este timpul pentru medicament.',
-    TaskCategory.hydration => 'Ia o pauză și bea apă.',
-    TaskCategory.activity => 'Hai să te miști puțin!',
-    TaskCategory.sleep => 'Pregătește-te pentru un somn odihnitor.',
-    TaskCategory.appointment => 'Ai o programare medicală.',
-    TaskCategory.general => 'Este timpul pentru această sarcină.',
+    TaskCategory.medication => 'Time for your medication.',
+    TaskCategory.hydration => 'Take a break and drink some water.',
+    TaskCategory.activity => 'Time to move a little!',
+    TaskCategory.sleep => 'Get ready for a restful sleep.',
+    TaskCategory.appointment => 'You have a medical appointment.',
+    TaskCategory.general => 'Time for this task.',
   };
 }
 

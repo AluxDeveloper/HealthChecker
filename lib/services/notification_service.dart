@@ -24,7 +24,7 @@ class NotificationService implements TaskNotifier {
       FlutterLocalNotificationsPlugin();
 
   static const _channelId = 'task_reminders';
-  static const _channelName = 'Mementouri sarcini';
+  static const _channelName = 'Task reminders';
 
   Future<void> init() async {
     tz_data.initializeTimeZones();
@@ -73,7 +73,7 @@ class NotificationService implements TaskNotifier {
         android: AndroidNotificationDetails(
           _channelId,
           _channelName,
-          channelDescription: 'Notificări la ora stabilită pentru sarcini',
+          channelDescription: 'Reminders at the scheduled time of your tasks',
           importance: Importance.high,
           priority: Priority.high,
           category: AndroidNotificationCategory.reminder,

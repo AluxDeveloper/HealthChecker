@@ -172,7 +172,7 @@ class TaskStore extends ChangeNotifier {
     } catch (e) {
       _syncStatus = SyncStatus.offline;
       _syncError = e.toString();
-      debugPrint('Sincronizarea cu Supabase a eșuat: $e');
+      debugPrint('Sync with Supabase failed: $e');
     } finally {
       _syncing = false;
       notifyListeners();

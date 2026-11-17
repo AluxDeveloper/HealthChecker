@@ -6,5 +6,6 @@
 /// sarcinile lui. Cheia „secret” și parola bazei NU se pun niciodată aici.
 abstract final class SupabaseConfig {
   static const url = 'https://ytugnoacdplwmsjsuqet.supabase.co';
-  static const publishableKey = 'sb_publishable_Yj-L5l4KVSNpslxhoI3-FA_-zIkCf8-';
+  static const publishableKey =
+      'sb_publishable_Yj-L5l4KVSNpslxhoI3-FA_-zIkCf8-';
 }

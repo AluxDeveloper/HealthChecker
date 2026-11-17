@@ -167,7 +167,7 @@ class _SplashScreenState extends State<SplashScreen>
                       child: Column(
                         children: [
                           Text(
-                            'Sarcini',
+                            'Tasks',
                             style: TextStyle(
                               fontSize: 34,
                               fontWeight: FontWeight.w700,
@@ -177,7 +177,7 @@ class _SplashScreenState extends State<SplashScreen>
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            'Grijă de tine, la timp.',
+                            'Take care of yourself, on time.',
                             style: TextStyle(
                               fontSize: 17,
                               color: white.withValues(alpha: 0.7),

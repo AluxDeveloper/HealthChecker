@@ -1,4 +1,5 @@
-import 'package:supabase_flutter/supabase_flutter.dart' show Supabase, SupabaseClient;
+import 'package:supabase_flutter/supabase_flutter.dart'
+    show Supabase, SupabaseClient;
 
 import '../models/task.dart';
 import 'task_remote.dart';

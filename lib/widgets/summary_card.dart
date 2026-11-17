@@ -16,9 +16,8 @@ class SummaryCard extends StatelessWidget {
   /// Următoarea sarcină nefinalizată din viitor, dacă există.
   final Task? next;
 
-  static String _when(DateTime d) => RoFormat.day(d) == 'Azi'
-      ? RoFormat.time(d)
-      : RoFormat.dateTime(d).toLowerCase();
+  static String _when(DateTime d) =>
+      AppFormat.isToday(d) ? AppFormat.time(d) : AppFormat.dateTime(d);
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +27,11 @@ class SummaryCard extends StatelessWidget {
 
     final String headline;
     if (total == 0) {
-      headline = 'Nimic programat azi';
+      headline = 'Nothing scheduled today';
     } else if (done == total) {
-      headline = 'Totul e gata azi!';
+      headline = 'All done for today!';
     } else {
-      headline = '$done din $total finalizate';
+      headline = '$done of $total completed';
     }
 
     const white = CupertinoColors.white;
@@ -75,7 +74,7 @@ class SummaryCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'AZI',
+                  'TODAY',
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
@@ -101,7 +100,7 @@ class SummaryCard extends StatelessWidget {
                       const SizedBox(width: 5),
                       Expanded(
                         child: Text(
-                          'Urmează: ${next!.title} · ${_when(next!.dueAt)}',
+                          'Up next: ${next!.title} · ${_when(next!.dueAt)}',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 15, color: soft),
@@ -111,7 +110,7 @@ class SummaryCard extends StatelessWidget {
                   )
                 else
                   Text(
-                    'Adaugă un obicei sănătos.',
+                    'Add a healthy habit.',
                     style: TextStyle(fontSize: 15, color: soft),
                   ),
               ],

@@ -39,10 +39,10 @@ class SarciniApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      title: 'Sarcini',
+      title: 'Tasks',
       debugShowCheckedModeBanner: false,
-      locale: const Locale('ro'),
-      supportedLocales: const [Locale('ro')],
+      locale: const Locale('en'),
+      supportedLocales: const [Locale('en')],
       localizationsDelegates: const [
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

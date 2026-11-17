@@ -21,8 +21,8 @@ class HistoryScreen extends StatelessWidget {
     return CupertinoPageScaffold(
       backgroundColor: bg,
       navigationBar: CupertinoNavigationBar(
-        middle: const Text('Istoric'),
-        previousPageTitle: 'Sarcini',
+        middle: const Text('History'),
+        previousPageTitle: 'Tasks',
         backgroundColor: bg.withValues(alpha: 0.85),
         border: null,
       ),
@@ -37,9 +37,9 @@ class HistoryScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(4, 0, 4, 14),
                   child: Text(
-                    'Sarcinile șterse sau a căror oră a trecut rămân aici '
-                    '${RoFormat.duration(Task.retention)}, apoi dispar '
-                    'definitiv, și din aplicație, și din baza de date.',
+                    'Deleted tasks and tasks whose time has passed stay here for '
+                    '${AppFormat.duration(Task.retention)}, then they are '
+                    'removed for good, from the app and from the database.',
                     style: TextStyle(
                       fontSize: 14,
                       height: 1.35,
@@ -88,10 +88,10 @@ class _HistoryTile extends StatelessWidget {
     final blue = HealthColors.medicalBlue.resolveFrom(context);
 
     final (String status, Color statusColor) = task.isDeleted
-        ? ('Ștearsă', red)
+        ? ('Deleted', red)
         : task.done
-        ? ('Finalizată', blue)
-        : ('Ora a trecut', secondary);
+        ? ('Completed', blue)
+        : ('Past due', secondary);
 
     final left = task.expiresAt.difference(DateTime.now());
 
@@ -162,13 +162,13 @@ class _HistoryTile extends StatelessWidget {
           _line(
             context,
             CupertinoIcons.calendar,
-            'Programată: ${RoFormat.dateTime(task.dueAt)}',
+            'Scheduled: ${AppFormat.dateTime(task.dueAt)}',
           ),
           if (task.deletedAt case final deleted?)
             _line(
               context,
               CupertinoIcons.trash,
-              'Ștearsă: ${RoFormat.dateTime(deleted)}',
+              'Deleted: ${AppFormat.dateTime(deleted)}',
             ),
           Row(
             children: [
@@ -176,7 +176,7 @@ class _HistoryTile extends StatelessWidget {
                 child: _line(
                   context,
                   CupertinoIcons.timer,
-                  'Dispare în ${RoFormat.duration(left)}',
+                  'Disappears in ${AppFormat.duration(left)}',
                 ),
               ),
               if (onRestore != null)
@@ -185,7 +185,7 @@ class _HistoryTile extends StatelessWidget {
                   minimumSize: const Size(0, 30),
                   onPressed: onRestore,
                   child: const Text(
-                    'Restaurează',
+                    'Restore',
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -226,7 +226,7 @@ class _Empty extends StatelessWidget {
           Icon(CupertinoIcons.clock, size: 44, color: secondary),
           const SizedBox(height: 12),
           Text(
-            'Istoricul e gol',
+            'History is empty',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w700,
@@ -259,19 +259,19 @@ class _SyncFooter extends StatelessWidget {
       SyncStatus.syncing => (
         CupertinoIcons.arrow_2_circlepath,
         secondary,
-        'Se sincronizează cu baza de date…',
+        'Syncing with the server…',
       ),
       SyncStatus.online => (
         CupertinoIcons.checkmark_circle_fill,
         CupertinoColors.systemGreen.resolveFrom(context),
-        'Salvat în cloud (Supabase)'
-            '${last == null ? '' : ' · ${RoFormat.time(last)}'}',
+        'Saved to the cloud (Supabase)'
+            '${last == null ? '' : ' · ${AppFormat.time(last)}'}',
       ),
       SyncStatus.offline => (
         CupertinoIcons.exclamationmark_triangle_fill,
         CupertinoColors.systemOrange.resolveFrom(context),
-        'Fără legătură cu serverul. Datele se salvează pe telefon și '
-            'se trimit când revine legătura.',
+        'No connection to the server. Your data is saved on the phone '
+            'and will sync when the connection is back.',
       ),
     };
     if (icon == null) return const SizedBox.shrink();

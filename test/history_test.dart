@@ -162,20 +162,27 @@ void main() {
     expect(remote.rows.keys, [1]);
   });
 
-  test('duratele se scriu corect în română', () {
-    expect(RoFormat.duration(const Duration(hours: 72)), '3 zile');
+  test('durations read naturally in English', () {
+    expect(AppFormat.duration(const Duration(hours: 72)), '3 days');
     expect(
-      RoFormat.duration(const Duration(days: 2, hours: 1)),
-      '2 zile și 1 oră',
+      AppFormat.duration(const Duration(days: 2, hours: 1)),
+      '2 days and 1 hour',
     );
     expect(
-      RoFormat.duration(const Duration(hours: 21, minutes: 5)),
-      '21 de ore și 5 minute',
+      AppFormat.duration(const Duration(hours: 21, minutes: 5)),
+      '21 hours and 5 minutes',
     );
-    expect(RoFormat.duration(const Duration(minutes: 1)), '1 minut');
+    expect(AppFormat.duration(const Duration(minutes: 1)), '1 minute');
+    final now = DateTime.now();
+    final at9 = DateTime(now.year, now.month, now.day, 9);
+    expect(AppFormat.inSentence(at9), 'today at 09:00');
     expect(
-      RoFormat.duration(const Duration(seconds: 20)),
-      'mai puțin de un minut',
+      AppFormat.inSentence(at9.add(const Duration(days: 1))),
+      'tomorrow at 09:00',
+    );
+    expect(
+      AppFormat.duration(const Duration(seconds: 20)),
+      'less than a minute',
     );
   });
 
@@ -206,20 +213,20 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Vitamina D'), findsNothing);
 
-    await tester.tap(find.bySemanticsLabel('Istoric'));
+    await tester.tap(find.bySemanticsLabel('History'));
     await tester.pumpAndSettle();
     expect(find.text('Vitamina D'), findsOneWidget);
-    expect(find.text('Ștearsă'), findsOneWidget);
-    expect(find.textContaining('Dispare în'), findsOneWidget);
+    expect(find.text('Deleted'), findsOneWidget);
+    expect(find.textContaining('Disappears in'), findsOneWidget);
 
     await tester.runAsync(() async {
-      await tester.tap(find.text('Restaurează'));
+      await tester.tap(find.text('Restore'));
       await Future<void>.delayed(const Duration(milliseconds: 50));
     });
     await tester.pumpAndSettle();
-    expect(find.text('Istoricul e gol'), findsOneWidget);
+    expect(find.text('History is empty'), findsOneWidget);
 
-    await tester.tap(find.text('Sarcini'));
+    await tester.tap(find.text('Tasks'));
     await tester.pumpAndSettle();
     expect(find.text('Vitamina D'), findsOneWidget);
   });

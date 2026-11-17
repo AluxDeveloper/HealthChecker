@@ -117,22 +117,22 @@ class _TaskEditorSheetState extends State<TaskEditorSheet> {
     final ok = await showCupertinoModalPopup<bool>(
       context: context,
       builder: (ctx) => CupertinoActionSheet(
-        title: const Text('Ștergi această sarcină?'),
+        title: const Text('Delete this task?'),
         message: const Text(
-          'Notificarea va fi anulată. Sarcina rămâne 3 zile în Istoric, '
-          'de unde o poți restaura.',
+          'The reminder will be cancelled. The task stays in History for '
+          '3 days, so you can still restore it.',
         ),
         actions: [
           CupertinoActionSheetAction(
             isDestructiveAction: true,
             onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('Șterge sarcina'),
+            child: const Text('Delete task'),
           ),
         ],
         cancelButton: CupertinoActionSheetAction(
           isDefaultAction: true,
           onPressed: () => Navigator.pop(ctx, false),
-          child: const Text('Anulează'),
+          child: const Text('Cancel'),
         ),
       ),
     );
@@ -152,14 +152,14 @@ class _TaskEditorSheetState extends State<TaskEditorSheet> {
         leading: CupertinoButton(
           padding: EdgeInsets.zero,
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Anulează'),
+          child: const Text('Cancel'),
         ),
-        middle: Text(_isNew ? 'Sarcină nouă' : 'Detalii'),
+        middle: Text(_isNew ? 'New task' : 'Details'),
         trailing: CupertinoButton(
           padding: EdgeInsets.zero,
           onPressed: _canSave ? _save : null,
           child: Text(
-            _isNew ? 'Adaugă' : 'Gata',
+            _isNew ? 'Add' : 'Done',
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
         ),
@@ -192,7 +192,7 @@ class _TaskEditorSheetState extends State<TaskEditorSheet> {
           Padding(
             padding: const EdgeInsets.only(left: 4, bottom: 8),
             child: Text(
-              'CATEGORIE',
+              'CATEGORY',
               style: TextStyle(
                 fontSize: 13,
                 color: CupertinoColors.secondaryLabel.resolveFrom(context),
@@ -245,7 +245,7 @@ class _TaskEditorSheetState extends State<TaskEditorSheet> {
         ),
         CupertinoTextField.borderless(
           controller: _notes,
-          placeholder: 'Notițe',
+          placeholder: 'Notes',
           placeholderStyle: TextStyle(color: placeholder, fontSize: 17),
           style: const TextStyle(fontSize: 17),
           padding: const EdgeInsets.fromLTRB(16, 13, 16, 13),
@@ -276,8 +276,8 @@ class _TaskEditorSheetState extends State<TaskEditorSheet> {
             icon: CupertinoIcons.calendar,
             color: HealthColors.crimson,
           ),
-          title: const Text('Data'),
-          additionalInfo: value(RoFormat.day(_dueAt), _picker == _Picker.date),
+          title: const Text('Date'),
+          additionalInfo: value(AppFormat.day(_dueAt), _picker == _Picker.date),
           onTap: () => _togglePicker(_Picker.date),
         ),
         _expandable(
@@ -302,8 +302,11 @@ class _TaskEditorSheetState extends State<TaskEditorSheet> {
             icon: CupertinoIcons.clock_fill,
             color: HealthColors.medicalBlue,
           ),
-          title: const Text('Ora'),
-          additionalInfo: value(RoFormat.time(_dueAt), _picker == _Picker.time),
+          title: const Text('Time'),
+          additionalInfo: value(
+            AppFormat.time(_dueAt),
+            _picker == _Picker.time,
+          ),
           onTap: () => _togglePicker(_Picker.time),
         ),
         _expandable(
@@ -342,15 +345,15 @@ class _TaskEditorSheetState extends State<TaskEditorSheet> {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final picks = <(String, IconData, DateTime)>[
-      ('Peste 1 oră', CupertinoIcons.timer, now.add(const Duration(hours: 1))),
+      ('In 1 hour', CupertinoIcons.timer, now.add(const Duration(hours: 1))),
       if (now.hour < 19)
         (
-          'Diseară',
+          'Tonight',
           CupertinoIcons.moon_fill,
           today.add(const Duration(hours: 20)),
         ),
       (
-        'Mâine',
+        'Tomorrow',
         CupertinoIcons.sunrise_fill,
         today.add(const Duration(days: 1, hours: 9)),
       ),
@@ -375,12 +378,12 @@ class _TaskEditorSheetState extends State<TaskEditorSheet> {
     final String footer;
     final bool warn = _remind && _inPast;
     if (!_remind) {
-      footer = 'Nu vei primi nicio notificare pentru această sarcină.';
+      footer = 'No reminder will be sent for this task.';
     } else if (warn) {
-      footer = 'Ora selectată a trecut — alege o oră din viitor ca să primești notificarea.';
-    } else {
       footer =
-          'Vei primi o notificare ${RoFormat.dateTime(_dueAt).toLowerCase()}.';
+          'This time has already passed. Pick a future time to get a reminder.';
+    } else {
+      footer = 'You will get a reminder ${AppFormat.inSentence(_dueAt)}.';
     }
 
     return CupertinoListSection.insetGrouped(
@@ -402,7 +405,7 @@ class _TaskEditorSheetState extends State<TaskEditorSheet> {
             icon: CupertinoIcons.bell_fill,
             color: HealthColors.medicalBlue,
           ),
-          title: const Text('Notificare'),
+          title: const Text('Reminder'),
           trailing: CupertinoSwitch(
             activeTrackColor: HealthColors.medicalBlue.resolveFrom(context),
             value: _remind,
@@ -422,7 +425,7 @@ class _TaskEditorSheetState extends State<TaskEditorSheet> {
         CupertinoListTile(
           title: Center(
             child: Text(
-              'Șterge sarcina',
+              'Delete task',
               style: TextStyle(
                 color: CupertinoColors.systemRed.resolveFrom(context),
               ),
